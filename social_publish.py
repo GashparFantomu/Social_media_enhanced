@@ -8,16 +8,14 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-
-def publica_pe_x(text_tweet):
-    """Publică un mesaj pe X (Twitter)."""
+def publica_pe_x(text_tweet, api_key, api_secret, access_token, access_secret):
+    """Publică un mesaj pe X (Twitter) folosind credențialele utilizatorului."""
     try:
         client = tweepy.Client(
-            bearer_token="X_BEARER_TOKEN",
-            consumer_key="X_API_KEY",
-            consumer_secret="X_API_SECRET",
-            access_token="X_ACCESS_TOKEN",
-            access_token_secret="X_ACCESS_SECRET"
+            consumer_key=api_key,
+            consumer_secret=api_secret,
+            access_token=access_token,
+            access_token_secret=access_secret
         )
         response = client.create_tweet(text=text_tweet)
         mesaj = f"SUCCES X: Tweet publicat (ID: {response.data['id']})"
@@ -31,20 +29,16 @@ def publica_pe_x(text_tweet):
         return False
 
 
-def publica_pe_linkedin(text_postare):
-    """Publică un mesaj pe LinkedIn."""
-    # Aceste date trebuie obținute din aplicația ta LinkedIn Developer
-    LINKEDIN_TOKEN = "https://n8n-production-8ccd0.up.railway.app/webhook-test/08585fc0-515a-4461-8823-3dfba9ea0b33"
-    URN = "urn:li:person:ID_UL_TAU"
-
-    url = "[https://api.linkedin.com/v2/ugcPosts](https://api.linkedin.com/v2/ugcPosts)"
+def publica_pe_linkedin(text_postare, user_token, user_urn):
+    """Publică un mesaj pe LinkedIn folosind credențialele utilizatorului."""
+    url = "https://api.linkedin.com/v2/ugcPosts"
     headers = {
-        "Authorization": f"Bearer {LINKEDIN_TOKEN}",
+        "Authorization": f"Bearer {user_token}",
         "Content-Type": "application/json",
         "X-Restli-Protocol-Version": "2.0.0"
     }
     payload = {
-        "author": URN,
+        "author": user_urn,
         "lifecycleState": "PUBLISHED",
         "specificContent": {
             "com.linkedin.ugc.ShareContent": {
