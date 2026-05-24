@@ -1,7 +1,7 @@
 import google.generativeai as genai
 
 # Pune cheia ta reala intre ghilimele:
-genai.configure(api_key="AIzaSyBRFO2Avngh0kLOxgEstzdT42wCr5cgqPY")
+genai.configure(api_key="API KEY") #ma bat ăștia la cap cu emailuri că cică e descoperit an plm.
 
 print("Se interogheaza Google pentru modelele disponibile...\n")
 
