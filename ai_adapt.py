@@ -3,7 +3,7 @@ import json
 try:
     import google.generativeai as genai
     # \C3\8Enlocuie\C8\99te cu cheia ta real\C4\83 din Google AI Studio
-    genai.configure(api_key="CHEIA_TA_GEMINI")
+    genai.configure(api_key="API KEY GEMINI")
     _HAS_GENAI = True
 except Exception:
     genai = None
@@ -39,7 +39,7 @@ def adapteaza_continut(master_post):
             "x": x_text,
         }
 
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.5-flash')
 
     prompt = f"""
     E\C8\99ti un expert \C3\AEn social media marketing. Adapteaz\C4\83 urm\C4\83torul "Master Post" pentru:

@@ -1,0 +1,3 @@
+2026-05-24 21:45:08,275 - ERROR - EȘEC X: 401 Unauthorized
+Unauthorized
+2026-05-24 21:45:08,281 - ERROR - EȘEC LINKEDIN (Rețea): No connection adapters were found for '[https://api.linkedin.com/v2/ugcPosts](https://api.linkedin.com/v2/ugcPosts)'

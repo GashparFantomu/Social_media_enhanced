@@ -34,7 +34,7 @@ def publica_pe_x(text_tweet):
 def publica_pe_linkedin(text_postare):
     """Publică un mesaj pe LinkedIn."""
     # Aceste date trebuie obținute din aplicația ta LinkedIn Developer
-    LINKEDIN_TOKEN = "LINKEDIN_ACCESS_TOKEN"
+    LINKEDIN_TOKEN = "https://n8n-production-8ccd0.up.railway.app/webhook-test/08585fc0-515a-4461-8823-3dfba9ea0b33"
     URN = "urn:li:person:ID_UL_TAU"
 
     url = "[https://api.linkedin.com/v2/ugcPosts](https://api.linkedin.com/v2/ugcPosts)"

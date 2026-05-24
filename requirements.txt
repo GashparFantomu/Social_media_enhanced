@@ -1,4 +1,4 @@
 requests
 tweepy
 streamlit
-google-generative-ai
+google-generativeai
