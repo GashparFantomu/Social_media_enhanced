@@ -55,6 +55,54 @@ def publica_pe_facebook(text_postare, page_access_token, page_id):
         logging.error(mesaj)
         return False
 
+
+def publica_pe_threads(text_postare, threads_token):
+    """Publică un mesaj pe Threads folosind Threads API (Meta)."""
+    # Pasul 1: Creăm containerul pentru text
+    url_container = "https://graph.threads.net/v1.0/me/threads"
+    payload_container = {
+        "media_type": "TEXT",
+        "text": text_postare,
+        "access_token": threads_token
+    }
+
+    try:
+        # Trimitem textul către Meta
+        response_c = requests.post(url_container, data=payload_container)
+        if response_c.status_code != 200:
+            mesaj = f"EȘEC THREADS (Container): {response_c.status_code} - {response_c.text}"
+            print(f"❌ {mesaj}")
+            logging.error(mesaj)
+            return False
+
+        # Dacă e succes, Meta ne dă un ID de container
+        container_id = response_c.json().get("id")
+
+        # Pasul 2: Publicăm containerul creat
+        url_publish = "https://graph.threads.net/v1.0/me/threads_publish"
+        payload_publish = {
+            "creation_id": container_id,
+            "access_token": threads_token
+        }
+
+        response_p = requests.post(url_publish, data=payload_publish)
+        if response_p.status_code == 200:
+            mesaj = "SUCCES THREADS: Postare publicată live!"
+            print(f"✅ {mesaj}")
+            logging.info(mesaj)
+            return True
+        else:
+            mesaj = f"EȘEC THREADS (Publicare): {response_p.status_code} - {response_p.text}"
+            print(f"❌ {mesaj}")
+            logging.error(mesaj)
+            return False
+
+    except Exception as e:
+        mesaj = f"EȘEC THREADS (Rețea): {e}"
+        print(f"❌ {mesaj}")
+        logging.error(mesaj)
+        return False
+
 def publica_pe_linkedin(text_postare, user_token, user_urn):
     """Publică un mesaj pe LinkedIn folosind credențialele utilizatorului."""
     url = "https://api.linkedin.com/v2/ugcPosts"
