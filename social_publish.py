@@ -29,6 +29,32 @@ def publica_pe_x(text_tweet, api_key, api_secret, access_token, access_secret):
         return False
 
 
+def publica_pe_facebook(text_postare, page_access_token, page_id):
+    """Publică un mesaj pe o Pagină de Facebook."""
+    url = f"https://graph.facebook.com/{page_id}/feed"
+    payload = {
+        "message": text_postare,
+        "access_token": page_access_token
+    }
+
+    try:
+        response = requests.post(url, data=payload)
+        if response.status_code == 200:
+            mesaj = "SUCCES FACEBOOK: Postare publicată!"
+            print(f"✅ {mesaj}")
+            logging.info(mesaj)
+            return True
+        else:
+            mesaj = f"EȘEC FACEBOOK: Cod {response.status_code}. {response.text}"
+            print(f"❌ {mesaj}")
+            logging.error(mesaj)
+            return False
+    except Exception as e:
+        mesaj = f"EȘEC FACEBOOK (Rețea): {e}"
+        print(f"❌ {mesaj}")
+        logging.error(mesaj)
+        return False
+
 def publica_pe_linkedin(text_postare, user_token, user_urn):
     """Publică un mesaj pe LinkedIn folosind credențialele utilizatorului."""
     url = "https://api.linkedin.com/v2/ugcPosts"

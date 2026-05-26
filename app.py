@@ -23,6 +23,10 @@ with st.sidebar:
     linkedin_token = st.text_input("Access Token LinkedIn", type="password")
     linkedin_urn = st.text_input("LinkedIn URN (ex: urn:li:person:12345)", type="password")
 
+    st.subheader("Facebook")
+    fb_token = st.text_input("Page Access Token Facebook", type="password")
+    fb_page_id = st.text_input("Facebook Page ID", type="default")
+
 # --- INTERFAȚA PRINCIPALĂ ---
 st.title("🚀 AI Social Cross-Poster")
 st.markdown("Acest instrument preia un mesaj brut și îl adaptează inteligent pentru LinkedIn și X.")
