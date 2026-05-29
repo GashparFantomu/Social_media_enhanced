@@ -1,26 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function Dashboard() {
   const [masterPost, setMasterPost] = useState('');
-  const [geminiKey, setGeminiKey] = useState('');
+
+  const [geminiKey, setGeminiKey] = useState(() => localStorage.getItem('gemini_key') || '');
+
+  const [tokens] = useState(() => ({
+    linkedin: localStorage.getItem('linkedin_token'),
+    facebook: localStorage.getItem('facebook_token'),
+    x: localStorage.getItem('x_token'),
+    threads: localStorage.getItem('threads_token'),
+  }));
+
   const [loading, setLoading] = useState(false);
   const [generatedContent, setGeneratedContent] = useState(null);
-
-  // Stările pentru butoanele de publicare
-  const [tokens, setTokens] = useState({});
   const [publishStatus, setPublishStatus] = useState({});
-
-  useEffect(() => {
-    setTokens({
-      linkedin: localStorage.getItem('linkedin_token'),
-      facebook: localStorage.getItem('facebook_token'),
-      x: localStorage.getItem('x_token'),
-      threads: localStorage.getItem('threads_token'),
-    });
-
-    const savedGemini = localStorage.getItem('gemini_key');
-    if (savedGemini) setGeminiKey(savedGemini);
-  }, []);
 
   const handleGeminiKeyChange = (e) => {
     setGeminiKey(e.target.value);
@@ -43,18 +37,18 @@ export default function Dashboard() {
 
       const data = await response.json();
       if (response.ok) {
-        // Presupunem că Gemini returnează { x: "...", linkedin: "..." }
-        // Clonăm textele și pentru Facebook și Threads
         setGeneratedContent({
           x: data.x,
           linkedin: data.linkedin,
-          facebook: data.linkedin, // Facebook preia formatul LinkedIn
-          threads: data.x          // Threads preia formatul X
+          facebook: data.linkedin,
+          threads: data.x
         });
       } else {
         alert(`❌ Eroare: ${data.error}`);
       }
     } catch (err) {
+      // 2. Afișăm eroarea în consolă pentru a folosi variabila 'err' și a mulțumi linterul
+      console.error('Eroare la adaptare conținut:', err);
       alert('❌ Nu s-a putut contacta serverul backend (Flask). Este pornit?');
     } finally {
       setLoading(false);
@@ -71,7 +65,6 @@ export default function Dashboard() {
         body: JSON.stringify({
           text: text,
           token: tokens[platform],
-          // urn: "urn:li:person:..." -> Pentru LinkedIn, în producție îl luăm din profil. Îl simulăm acum.
           urn: 'urn:li:person:TEST_STUDENT'
         })
       });
@@ -82,6 +75,8 @@ export default function Dashboard() {
         setPublishStatus(prev => ({ ...prev, [platform]: 'error' }));
       }
     } catch (err) {
+      // 3. Afișăm eroarea în consolă și aici
+      console.error(`Eroare la publicarea pe ${platform}:`, err);
       setPublishStatus(prev => ({ ...prev, [platform]: 'error' }));
     }
   };
