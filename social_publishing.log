@@ -10,3 +10,18 @@ Your client app is not configured with the appropriate oauth1 app permissions fo
 Unauthorized
 2026-05-24 22:59:43,289 - ERROR - EȘEC X: 402 Payment Required
 Your enrolled account [2058626799190315008] does not have any credits to fulfill this request.
+2026-05-29 15:24:29,766 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-29 15:24:29,767 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-29 15:24:29,777 - INFO -  * Restarting with watchdog (inotify)
+2026-05-29 15:24:30,522 - WARNING -  * Debugger is active!
+2026-05-29 15:24:30,522 - INFO -  * Debugger PIN: 118-625-512
+2026-05-29 15:28:17,351 - INFO - 127.0.0.1 - - [29/May/2026 15:28:17] "OPTIONS /api/adapt HTTP/1.1" 200 -
+2026-05-29 15:28:25,185 - INFO - 127.0.0.1 - - [29/May/2026 15:28:25] "POST /api/adapt HTTP/1.1" 200 -
+2026-05-29 15:28:37,849 - INFO - 127.0.0.1 - - [29/May/2026 15:28:37] "[33mOPTIONS /api/publish/x HTTP/1.1[0m" 404 -
+2026-05-29 15:28:39,029 - INFO - 127.0.0.1 - - [29/May/2026 15:28:39] "[33mOPTIONS /api/publish/x HTTP/1.1[0m" 404 -
+2026-05-29 15:33:09,498 - INFO - 127.0.0.1 - - [29/May/2026 15:33:09] "OPTIONS /api/adapt HTTP/1.1" 200 -
+2026-05-29 15:33:20,495 - INFO - 127.0.0.1 - - [29/May/2026 15:33:20] "POST /api/adapt HTTP/1.1" 200 -
+2026-05-29 15:47:41,127 - INFO - 127.0.0.1 - - [29/May/2026 15:47:41] "OPTIONS /api/adapt HTTP/1.1" 200 -
+2026-05-29 15:47:49,978 - INFO - 127.0.0.1 - - [29/May/2026 15:47:49] "POST /api/adapt HTTP/1.1" 200 -
+2026-05-29 15:48:04,323 - INFO - 127.0.0.1 - - [29/May/2026 15:48:04] "[33mOPTIONS /api/publish/x HTTP/1.1[0m" 404 -
